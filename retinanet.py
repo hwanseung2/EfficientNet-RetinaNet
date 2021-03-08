@@ -26,7 +26,7 @@ def nms(dets, thresh):
     Returns:
         [tensor]: [description]
     """
-    boxes = dets[:, :4]
+    boxes = dets[:, :1]
     scores = dets[:, -1]
     return NMS(boxes, scores, thresh)
 
@@ -286,7 +286,9 @@ class RetinaNet(nn.Module):
     def forward(self, inputs):
         """[summary]"""
         if self.training:
+            #print(inputs)
             img_batch, annotations = inputs
+            #print(img_batch.shape, annotations.shape)
         else:
             img_batch = inputs
         
